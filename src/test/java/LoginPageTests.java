@@ -5,6 +5,8 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import pages.LoginPage;
+import pages.MailPage;
+import pages.PasswordPage;
 
 import static pages.PagesConstants.MAIL_PAGE;
 
@@ -23,12 +25,14 @@ public class LoginPageTests
     @Test
     public void loginPositiveTest()
     {
-        LoginPage loginPage = new LoginPage(driver);
-        loginPage.login();
-        loginPage.openFirstLetter();
-        String mail = loginPage.getMail();
-        String sender = loginPage.getSender();
-        loginPage.sendBack(sender, mail);
+        new LoginPage(driver).setLogin();
+        new PasswordPage(driver).setPassword();
+        MailPage mailPage = new MailPage(driver);
+        mailPage.openMailPage();
+        mailPage.openFirstLetter();
+        String mail = mailPage.getMail();
+        String sender = mailPage.getSender();
+        mailPage.sendBack(sender, mail);
     }
 
     @AfterClass

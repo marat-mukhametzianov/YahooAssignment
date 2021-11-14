@@ -19,6 +19,7 @@ public class LoginPage extends DriverActions
 
     public void setLogin()
     {
+        driver.get(MAIL_PAGE);
         findFieldAndSetText(By.xpath(LOGIN_FIELD_LOCATOR), LOGIN, LOGIN_FIELD_HAS_NOT_BEEN_FOUND, 5);
         findElementAndSetCheck(By.xpath(STAY_IN_CHECK_BOX_LOCATOR), CHECK_BOX_STAY_IN_HAS_NOT_BEEN_FOUND, false, 5);
         findElementAndClick(By.xpath(NEXT_BUTTON_LOCATOR), NEXT_LOGIN_BUTTON_HAS_NOT_BEEN_FOUND, 5);

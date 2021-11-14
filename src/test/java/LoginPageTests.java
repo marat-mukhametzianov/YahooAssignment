@@ -10,34 +10,19 @@ import pages.PasswordPage;
 
 import static pages.PagesConstants.MAIL_PAGE;
 
-public class LoginPageTests
+public class LoginPageTests extends TestBase
 {
-    WebDriver driver;
 
-    @BeforeClass
-    public void initialization()
-    {
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
-        driver.get(MAIL_PAGE);
-    }
 
     @Test
     public void loginPositiveTest()
     {
-        new LoginPage(driver).setLogin();
-        new PasswordPage(driver).setPassword();
-        MailPage mailPage = new MailPage(driver);
+        loginPage.setLogin();
+        passwordPage.setPassword();
         mailPage.openMailPage();
         mailPage.openFirstLetter();
         String mail = mailPage.getMail();
         String sender = mailPage.getSender();
         mailPage.sendBack(sender, mail);
-    }
-
-    @AfterClass
-    public void tierDown()
-    {
-//        driver.quit();
     }
 }

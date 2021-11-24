@@ -4,6 +4,8 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.List;
+
 public class DriverActions
 {
     public WebDriver driver;
@@ -39,6 +41,15 @@ public class DriverActions
         WebDriverWait webDriverWait = new WebDriverWait(driver, timeToWait);
         webDriverWait.withMessage(errorMessage);
         return webDriverWait.until(ExpectedConditions.presenceOfElementLocated(by));
+    }
+
+    public List<WebElement> waitForElements(By by, String errorMessage, int timeToWait)
+    {
+        WebDriverWait webDriverWait = new WebDriverWait(driver, timeToWait);
+        webDriverWait.withMessage(errorMessage);
+        webDriverWait.until(ExpectedConditions.presenceOfElementLocated(by));
+        List<WebElement> returnedValue = driver.findElements(by);
+        return returnedValue;
     }
 
     public void clearField(WebElement field)

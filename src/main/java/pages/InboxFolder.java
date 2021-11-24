@@ -4,30 +4,37 @@ import auxiliary.DriverActions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class MailPage extends DriverActions
+public class InboxFolder extends DriverActions
 {
-    public MailPage(WebDriver driver)
+    //URLs
+    private static final String INBOX_FOLDER_URL = "https://mail.yahoo.com/d/folders/1";
+
+    //Locators
+    private static final String SENT_FOLDER_LOCATOR = "//*[@data-test-folder-container = 'Sent']";
+
+    public InboxFolder(WebDriver driver)
     {
         super(driver);
     }
 
-    public void openMailPage()
+    public void getFirstLetterAndSendBack()
     {
-        driver.get("https://mail.yahoo.com/d/folders/1");
+        openFirstLetter();
+        sendBack();
     }
 
-    public void sendBack(String sender, String message)
+    public void sendBack()
     {
         driver.findElement(By.xpath("//*[@data-test-id = 'compose-button']")).click();
         findFieldAndSetText(
                 By.xpath("//*[@id = 'message-to-field']"),
-                sender,
+                getSender(),
                 "The address field hasn't been found",
                 5
         );
         findFieldAndSetText(
                 By.xpath("//*[@data-test-id = 'rte']/div"),
-                message,
+                getFirstMail(),
                 "The message field hasn't been found",
                 5
         );
@@ -40,7 +47,7 @@ public class MailPage extends DriverActions
         findElementAndClick(By.xpath("//*[@data-test-id = 'compose-send-button']"), "The send button hasn't been found", 5);
     }
 
-    public String getMail()
+    public String getFirstMail()
     {
         return driver.findElement(By.xpath("//*[@data-test-id = 'message-view-body-content']")).getText();
     }
@@ -54,6 +61,13 @@ public class MailPage extends DriverActions
 
     public void openFirstLetter()
     {
-        driver.findElements(By.xpath("//*[@role = 'list']/li")).get(1).click();
+        try
+        {
+            driver.findElements(By.xpath("//*[@role = 'list']/li")).get(1).click();
+        }
+        catch (IndexOutOfBoundsException e)
+        {
+            System.out.println("There is no the first letter.");
+        }
     }
 }

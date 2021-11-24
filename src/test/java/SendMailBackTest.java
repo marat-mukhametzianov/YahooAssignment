@@ -1,4 +1,4 @@
-import org.testng.Assert;
+import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
 public class SendMailBackTest extends TestBase
@@ -8,10 +8,8 @@ public class SendMailBackTest extends TestBase
     {
         loginPage.setLogin();
         passwordPage.setPassword();
-        mailPage.openMailPage();
-        mailPage.openFirstLetter();
-        String mail = mailPage.getMail();
-        String sender = mailPage.getSender();
-        mailPage.sendBack(sender, mail);
+        menuPage.openFolder(0);
+        inboxPage.getFirstLetterAndSendBack();
+        sentPage.isSentFolderEmpty();
     }
 }

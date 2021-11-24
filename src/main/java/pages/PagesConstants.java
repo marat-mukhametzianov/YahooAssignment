@@ -7,6 +7,7 @@ public final class PagesConstants
     public static final String NEXT_BUTTON_LOCATOR = "//*[@id='login-signin']";
     public static final String STAY_IN_CHECK_BOX_LOCATOR = "//*[@class = 'helper-item ']";
     public static final String PASSWORD_FIELD_LOCATOR = "//*[@id='login-passwd']";
+    public static final String SENT_FOLDER_LOCATOR = "//*[@data-test-folder-container = 'Sent']";
 
     public static final String LOGIN = "mmaratn_assignment@yahoo.com";
     public static final String PASSWORD = "mmaratn_assignment";

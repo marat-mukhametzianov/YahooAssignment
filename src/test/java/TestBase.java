@@ -4,18 +4,16 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
-import pages.LoginPage;
-import pages.MailPage;
-import pages.PasswordPage;
-
-import static pages.PagesConstants.MAIL_PAGE;
+import pages.*;
 
 public class TestBase
 {
-    public WebDriver driver;
-    public LoginPage loginPage;
-    public MailPage mailPage;
+    WebDriver driver;
+    LoginPage loginPage;
+    InboxFolder inboxPage;
     PasswordPage passwordPage;
+    SentPage sentPage;
+    MenuPage menuPage;
 
     @BeforeClass
     public void initialization()
@@ -24,9 +22,11 @@ public class TestBase
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--start-maximized");
         driver = new ChromeDriver(options);
+        menuPage = new MenuPage(driver);
         loginPage = new LoginPage(driver);
-        mailPage = new MailPage(driver);
+        inboxPage = new InboxFolder(driver);
         passwordPage = new PasswordPage(driver);
+        sentPage = new SentPage(driver);
     }
 
     @AfterClass

@@ -1,3 +1,5 @@
+package endToEnd;
+
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -5,12 +7,13 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import pages.*;
+import pages.areas.InboxArea;
 
 public class TestBase
 {
     WebDriver driver;
     LoginPage loginPage;
-    InboxFolder inboxPage;
+    InboxArea inboxArea;
     PasswordPage passwordPage;
     SentPage sentPage;
     MenuPage menuPage;
@@ -24,7 +27,7 @@ public class TestBase
         driver = new ChromeDriver(options);
         menuPage = new MenuPage(driver);
         loginPage = new LoginPage(driver);
-        inboxPage = new InboxFolder(driver);
+        inboxArea = new InboxArea(driver);
         passwordPage = new PasswordPage(driver);
         sentPage = new SentPage(driver);
     }

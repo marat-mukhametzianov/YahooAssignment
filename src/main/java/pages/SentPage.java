@@ -5,37 +5,59 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class SentPage extends DriverActions
 {
-
     //Locators
-    private static final String SENT_FOLDER_LOCATOR = "//*[@data-test-folder-container = 'Sent']";
+    private final String SELECT_ALL_SENT_LETTERS_LOCATOR = "//*[@data-test-id='checkbox']";
+    private final String DELETE_BUTTON_LOCATOR = "//*[@data-test-id='toolbar-delete']";
+    private final String MESSAGE_LIST_LOCATOR = "//*[@aria-label='Message list']/li";
 
     public SentPage(WebDriver driver)
     {
         super(driver);
     }
 
-    public void openSentFolder()
+    /**
+     * Just to check the existence of the list. If the list doesn't exist then nothing was sent.
+     * @return
+     */
+    public boolean isReplySent()
     {
-        findElementAndClick(
-                By.xpath(SENT_FOLDER_LOCATOR),
-                "The button Sent can't be found",
-                30
+        boolean returnedValue = false;
+        List<WebElement> sentList = waitForElements
+        (
+            By.xpath(MESSAGE_LIST_LOCATOR),
+            "The message list can't be found",
+            20
+        );
+        if (sentList.size() != 0)
+        {
+            returnedValue = true;
+        }
+        return returnedValue;
+    }
+
+    public void removeSent()
+    {
+        setCheckboxTrueOrFalse
+        (
+            By.xpath(SELECT_ALL_SENT_LETTERS_LOCATOR),
+            "The checkbox Select all can't be found",
+            true,
+            5
+        );
+        clickElement
+        (
+            By.xpath(DELETE_BUTTON_LOCATOR),
+            "The Delete button can't be found",
+            5
         );
     }
 
-    public boolean isSentFolderEmpty()
+    public boolean sentFolderIsEmpty()
     {
-        List<WebElement> sentList = waitForElements(By.xpath("//*[@aria-label = 'Message list']/li"), "The message list can't be found", 5);
-        List<String> data = new ArrayList<>();
-        for(WebElement element: sentList)
-        {
-            data.add(element.getText());
-        }
-        return true;
+        return elementExists(By.xpath(MESSAGE_LIST_LOCATOR), 5);
     }
 }

@@ -3,7 +3,7 @@
 <suite name="Mail suite">
     <test name="Send mail back">
         <classes>
-            <class name="SendMailBackTest"></class>
+            <class name="endToEnd.SendMailBackTest"></class>
         </classes>
     </test>
 </suite>

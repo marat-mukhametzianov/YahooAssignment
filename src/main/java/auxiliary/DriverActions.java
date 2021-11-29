@@ -15,7 +15,14 @@ public class DriverActions
         this.driver = driver;
     }
 
-    public void findElementAndSetCheck(By by, String errorMessage, boolean condition, int timeToWait)
+    /**
+     * Find the checkbox, and set the received value.
+     * @param by is locator of the checkbox.
+     * @param errorMessage
+     * @param condition is a true or false value to be set.
+     * @param timeToWait
+     */
+    public void setCheckboxTrueOrFalse(By by, String errorMessage, boolean condition, int timeToWait)
     {
         WebElement checkBox = waitForElement(by, errorMessage, timeToWait);
         if (checkBox.isSelected() != condition)
@@ -24,14 +31,20 @@ public class DriverActions
         }
     }
 
-    public void findFieldAndSetText(By by, String text, String errorMessage, int timeToWait)
+    public void setTextboxValue(By by, String text, String errorMessage, int timeToWait)
     {
         WebElement field = waitForElement(by, errorMessage, timeToWait);
-        clearField(field);
+        clearTextbox(field);
         field.sendKeys(text);
     }
 
-    public void findElementAndClick(By by, String errorMessage, int timeToWait)
+    public String takeText(By by, String errorMessage, int timeToWait)
+    {
+        WebElement field = waitForElement(by, errorMessage, timeToWait);
+        return field.getText();
+    }
+
+    public void clickElement(By by, String errorMessage, int timeToWait)
     {
         waitForElement(by,errorMessage, timeToWait).click();
     }
@@ -52,8 +65,21 @@ public class DriverActions
         return returnedValue;
     }
 
-    public void clearField(WebElement field)
+    public void clearTextbox(WebElement field)
     {
         field.sendKeys(Keys.chord(Keys.LEFT_CONTROL, Keys.SHIFT, Keys.LEFT, Keys.DELETE));
+    }
+
+    public boolean elementExists(By by, int timeToWait)
+    {
+        try
+        {
+            new WebDriverWait(driver, timeToWait).until(ExpectedConditions.presenceOfElementLocated(by));
+            return true;
+        }
+        catch (TimeoutException e)
+        {
+            return false;
+        }
     }
 }

@@ -16,7 +16,7 @@ public class PasswordPage extends DriverActions
 
     public void setPassword()
     {
-        findFieldAndSetText(By.xpath(PASSWORD_FIELD_LOCATOR), PASSWORD, PASSWORD_FIELD_HAS_NOT_BEEN_FOUND, 5);
-        findElementAndClick(By.xpath(NEXT_BUTTON_LOCATOR), NEXT_LOGIN_BUTTON_HAS_NOT_BEEN_FOUND, 5);
+        setTextboxValue(By.xpath(PASSWORD_FIELD_LOCATOR), PASSWORD, PASSWORD_FIELD_HAS_NOT_BEEN_FOUND, 5);
+        clickElement(By.xpath(NEXT_BUTTON_LOCATOR), NEXT_LOGIN_BUTTON_HAS_NOT_BEEN_FOUND, 5);
     }
 }

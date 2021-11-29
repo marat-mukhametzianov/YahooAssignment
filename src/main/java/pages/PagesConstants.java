@@ -2,7 +2,6 @@ package pages;
 
 public final class PagesConstants
 {
-    public static final String MAIL_PAGE = "https://login.yahoo.com/";
     public static final String LOGIN_FIELD_LOCATOR = "//*[@id='login-username']";
     public static final String NEXT_BUTTON_LOCATOR = "//*[@id='login-signin']";
     public static final String STAY_IN_CHECK_BOX_LOCATOR = "//*[@class = 'helper-item ']";

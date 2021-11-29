@@ -10,6 +10,9 @@ import java.util.Map;
 
 public class MenuPage extends DriverActions
 {
+    //URLs
+    private final String MAIL_PAGE = "https://mail.yahoo.com/d/folders/1";
+
     //Locators
     private final String INBOX_BUTTON_LOCATOR = "//*[@data-test-folder-container = 'Inbox']";
     private final String SENT_BUTTON_LOCATOR = "//*[@data-test-folder-container = 'Sent']";
@@ -22,6 +25,11 @@ public class MenuPage extends DriverActions
         initializeLocators();
     }
 
+    public void open()
+    {
+        driver.get(MAIL_PAGE);
+    }
+
     private void initializeLocators()
     {
         locators.put(0, INBOX_BUTTON_LOCATOR);
@@ -30,7 +38,7 @@ public class MenuPage extends DriverActions
 
     public void openFolder(Integer folderNumber)
     {
-        findElementAndClick(
+        clickElement(
                 By.xpath(locators.get(folderNumber)),
                 new Formatter().format("The folder button %d can't be found", folderNumber).toString(),
                 5

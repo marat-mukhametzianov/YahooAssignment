@@ -15,13 +15,6 @@ public class DriverActions
         this.driver = driver;
     }
 
-    /**
-     * Find the checkbox, and set the received value.
-     * @param by is locator of the checkbox.
-     * @param errorMessage
-     * @param condition is a true or false value to be set.
-     * @param timeToWait
-     */
     public void setCheckboxTrueOrFalse(By by, String errorMessage, boolean condition, int timeToWait)
     {
         WebElement checkBox = waitForElement(by, errorMessage, timeToWait);

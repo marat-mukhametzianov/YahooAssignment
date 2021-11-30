@@ -9,27 +9,28 @@ import java.util.List;
 
 public class SentPage extends DriverActions
 {
-    //Locators
+    //Locator
     private final String SELECT_ALL_SENT_LETTERS_LOCATOR = "//*[@data-test-id='checkbox']";
     private final String DELETE_BUTTON_LOCATOR = "//*[@data-test-id='toolbar-delete']";
     private final String MESSAGE_LIST_LOCATOR = "//*[@aria-label='Message list']/li";
+
+    //Error message
+    private final String MESSAGE_LIST = "The message list can't be found";
+    private final String SELECT_ALL = "The checkbox Select all can't be found";
+    private final String DELETE_BUTTON = "The Delete button can't be found";
 
     public SentPage(WebDriver driver)
     {
         super(driver);
     }
 
-    /**
-     * Just to check the existence of the list. If the list doesn't exist then nothing was sent.
-     * @return
-     */
     public boolean isReplySent()
     {
         boolean returnedValue = false;
         List<WebElement> sentList = waitForElements
         (
             By.xpath(MESSAGE_LIST_LOCATOR),
-            "The message list can't be found",
+            MESSAGE_LIST,
             20
         );
         if (sentList.size() != 0)
@@ -44,14 +45,14 @@ public class SentPage extends DriverActions
         setCheckboxTrueOrFalse
         (
             By.xpath(SELECT_ALL_SENT_LETTERS_LOCATOR),
-            "The checkbox Select all can't be found",
+            SELECT_ALL,
             true,
             5
         );
         clickElement
         (
             By.xpath(DELETE_BUTTON_LOCATOR),
-            "The Delete button can't be found",
+            DELETE_BUTTON,
             5
         );
     }

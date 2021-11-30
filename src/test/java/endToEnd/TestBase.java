@@ -35,6 +35,6 @@ public class TestBase
     @AfterClass
     public void tierDown()
     {
-//        driver.quit();
+        driver.quit();
     }
 }

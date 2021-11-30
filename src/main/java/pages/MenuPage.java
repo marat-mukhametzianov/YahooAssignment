@@ -10,12 +10,12 @@ import java.util.Map;
 
 public class MenuPage extends DriverActions
 {
-    //URLs
-    private final String MAIL_PAGE = "https://mail.yahoo.com/d/folders/1";
-
     //Locators
     private final String INBOX_BUTTON_LOCATOR = "//*[@data-test-folder-container = 'Inbox']";
     private final String SENT_BUTTON_LOCATOR = "//*[@data-test-folder-container = 'Sent']";
+
+    //URLs
+    private final String MAIL_PAGE = "https://mail.yahoo.com/d/folders/1";
 
     private Map<Integer, String> locators = new HashMap<>();
 

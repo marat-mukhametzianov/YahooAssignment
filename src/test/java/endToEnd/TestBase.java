@@ -6,14 +6,28 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
 import pages.*;
 import pages.areas.InboxArea;
 import sun.net.www.content.text.PlainTextInputStream;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
 public class TestBase
 {
+    //SauceLabs
+    private final String SAUCELABS_URL = "https://vgnwdbhwrwotvsdtcg:e3c12d3e-da8a-4508-afbc-6be34da91e3f@ondemand.eu-central-1.saucelabs.com:443/wd/hub";
+    private final String USERNAME = "vgnwdbhwrwotvsdtcg";
+    private final String KEY = "e3c12d3e-da8a-4508-afbc-6be34da91e3f";
+
+    //Error message
+    private final String URL_EXCEPTION = "Something with URL";
+
     WebDriver driver;
     LoginPage loginPage;
     InboxArea inboxArea;
@@ -21,20 +35,38 @@ public class TestBase
     SentPage sentPage;
     MenuPage menuPage;
 
+    @Parameters({"browser"})
     @BeforeClass
-    public void initialization()
+    public void initialization(@Optional("chrome") String browserName)
     {
+        System.out.println("browser - " + browserName);
         MutableCapabilities mutableCapabilities = new MutableCapabilities();
-        mutableCapabilities.setCapability("username", "powercat");
-        mutableCapabilities.setCapability("accessKey", "81ebdd4b-2c73-4dab-a5ae-9e05a52f5950");
+        mutableCapabilities.setCapability("username", USERNAME);
+        mutableCapabilities.setCapability("accessKey", KEY);
         DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
         desiredCapabilities.setCapability("sauce:options", mutableCapabilities);
         desiredCapabilities.setCapability("browserVersion", "latest");
         desiredCapabilities.setCapability("platformName", "windows 7");
-        WebDriverManager.chromedriver().setup();
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--start-maximized");
-        driver = new ChromeDriver(options);
+        if(browserName.equals("chrome"))
+        {
+            WebDriverManager.chromedriver().setup();
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("--start-maximized");
+            desiredCapabilities.setCapability("browserName", "chrome");
+        }
+        else if(browserName.equals("firefox"))
+        {
+            WebDriverManager.firefoxdriver().setup();
+            desiredCapabilities.setCapability("browserName", "firefox");
+        }
+
+        try
+        {
+            driver = new RemoteWebDriver(new URL(SAUCELABS_URL), desiredCapabilities);
+        } catch (MalformedURLException e)
+        {
+            System.out.println(URL_EXCEPTION + " | " + e.getMessage());;
+        }
         menuPage = new MenuPage(driver);
         loginPage = new LoginPage(driver);
         inboxArea = new InboxArea(driver);

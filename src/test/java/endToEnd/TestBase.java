@@ -35,38 +35,13 @@ public class TestBase
     SentPage sentPage;
     MenuPage menuPage;
 
-    @Parameters({"browser"})
     @BeforeClass
     public void initialization(@Optional("chrome") String browserName)
     {
-        System.out.println("browser - " + browserName);
-        MutableCapabilities mutableCapabilities = new MutableCapabilities();
-        mutableCapabilities.setCapability("username", USERNAME);
-        mutableCapabilities.setCapability("accessKey", KEY);
-        DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
-        desiredCapabilities.setCapability("sauce:options", mutableCapabilities);
-        desiredCapabilities.setCapability("browserVersion", "latest");
-        desiredCapabilities.setCapability("platformName", "windows 7");
-        if(browserName.equals("chrome"))
-        {
-            WebDriverManager.chromedriver().setup();
-            ChromeOptions options = new ChromeOptions();
-            options.addArguments("--start-maximized");
-            desiredCapabilities.setCapability("browserName", "chrome");
-        }
-        else if(browserName.equals("firefox"))
-        {
-            WebDriverManager.firefoxdriver().setup();
-            desiredCapabilities.setCapability("browserName", "firefox");
-        }
-
-        try
-        {
-            driver = new RemoteWebDriver(new URL(SAUCELABS_URL), desiredCapabilities);
-        } catch (MalformedURLException e)
-        {
-            System.out.println(URL_EXCEPTION + " | " + e.getMessage());;
-        }
+        WebDriverManager.chromedriver().setup();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--start-maximized");
+        driver = new ChromeDriver(options);
         menuPage = new MenuPage(driver);
         loginPage = new LoginPage(driver);
         inboxArea = new InboxArea(driver);

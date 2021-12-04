@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="End to end suite. Receive a main and send it back.">
-    <test name="Sauce Labs. Chrome">
-        <parameter name="browser" value="chrome" />
+<suite name="Chrome. Win 10.">
+    <test name="End to end. Receive a main and send it back.">
         <classes>
-            <class name="endToEnd.SendMailBackTest" />
-        </classes>
-    </test>
-    <test name="Sauce Labs. Firefox">
-        <parameter name="browser" value="firefox" />
-        <classes>
-            <class name="endToEnd.SendMailBackTest" />
+            <class name="endToEnd.SendMailBackTest">
+                <methods>
+                    <include name="loginCheckMailReplyPositiveTest"/>
+                </methods>
+            </class>
         </classes>
     </test>
 </suite>

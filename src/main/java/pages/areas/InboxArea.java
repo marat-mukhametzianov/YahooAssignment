@@ -103,6 +103,6 @@ public class InboxArea extends DriverActions
             By.xpath(FIRST_LETTER_LOCATOR),
             FIRST_LETTER,
             5
-        ).get(1).click();
+        ).get(0).click();
     }
 }

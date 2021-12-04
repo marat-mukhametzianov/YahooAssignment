@@ -1,12 +1,13 @@
 <h2>Automation project</h2>
 <h3>The job scheme is:</h3>
-1. Log in to the site;
-2. Go to the Inbox folder;
-3. Open the first email;
-4. Get the letter message and sender's email;
-5. Create a new letter, put the obtained message, put the phrase "Sent back" to the subject line;
-6. Send the new letter;
-7. Go to the Sent folder, check it's not empty;
-8. Clean the Sent folder and check it's empty.
-
+<ul>
+<li>Log in to the site;
+<li>Go to the Inbox folder;
+<li>Open the first email;
+<li>Get the letter message and sender's email;
+<li>Create a new letter, put the obtained message, put the phrase "Sent back" to the subject line;
+<li>Send the new letter;
+<li>Go to the Sent folder, check it's not empty;
+<li>Clean the Sent folder and check it's empty.
+</ul>
 [Recording file is placed on LinkedIn:](https://www.linkedin.com/posts/mmaratn_sample-automation-project-javaselenium-activity-6872702448952217600-7KvR)

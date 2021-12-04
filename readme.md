@@ -1,5 +1,5 @@
-#Automation project
-###The job scheme is:
+<h2>Automation project</h2>
+<h3>The job scheme is:</h3>
 1. Log in to the site;
 2. Go to the Inbox folder;
 3. Open the first email;

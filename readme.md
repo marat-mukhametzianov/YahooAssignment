@@ -10,4 +10,4 @@
 <li>Go to the Sent folder, check it's not empty;
 <li>Clean the Sent folder and check it's empty.
 </ul>
-[Recording file is placed on LinkedIn:](https://www.linkedin.com/posts/mmaratn_sample-automation-project-javaselenium-activity-6872702448952217600-7KvR)
+<a href="https://www.linkedin.com/posts/mmaratn_sample-automation-project-javaselenium-activity-6872702448952217600-7KvR">Recording video</a>
